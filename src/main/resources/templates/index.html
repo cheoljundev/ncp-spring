@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<img src="" th:src="@{https://naveropenapi.apigw.ntruss.com/captcha-bin/v1/ncaptcha (key=${key})}" alt="">
+<form action="/image-captcha" method="post">
+    <input type="text" name="value">
+    <input type="hidden" name="key" th:value="${key}">
+    <input type="submit" value="확인">
+</form>
+</body>
+</html>
