@@ -13,6 +13,7 @@ import java.net.URL;
 @Service
 public class CaptchaService {
     public String issueImageCaptcha() {
+        ObjectMapper objectMapper = new ObjectMapper();
         String clientId = NcpKey.clientId;//애플리케이션 클라이언트 아이디값";
         String clientSecret = NcpKey.clientSecret;//애플리케이션 클라이언트 시크릿값";
         String result = null;
@@ -37,7 +38,8 @@ public class CaptchaService {
                 response.append(inputLine);
             }
             br.close();
-           result = response.toString().split(":")[1].replaceAll("[\"}]", "").trim();
+            JsonNode jsonNode = objectMapper.readTree(response.toString());
+            result = jsonNode.get("key").asText();
         } catch (Exception e) {
             System.out.println(e);
         }
